@@ -1,0 +1,48 @@
+package br.com.lgabrieldev.desafio_junior_plano_saude.models.beneficiario;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import br.com.lgabrieldev.desafio_junior_plano_saude.models.documento.Documento;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "beneficiario")
+public class Beneficiario {
+       
+     //attributes
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Setter(AccessLevel.NONE)
+     private Long id;
+
+     private String nome;
+
+     private String telefone;
+
+     @Column(name = "data_nascimento")
+     private LocalDate dataNascimento;
+
+     @Column(name = "data_inclusao")
+     private LocalDateTime dataInclusao;
+
+     @Column(name = "data_ultima_atualizacao")
+     private LocalDateTime dataUltimaAtualizacao;
+
+     @OneToMany(mappedBy = "beneficiario")
+     List<Documento> documentos;
+}
